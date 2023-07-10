@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3832025806589341734
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3832025806589341735}
+  - component: {fileID: 3832025806589341736}
+  m_Layer: 0
+  m_Name: grafo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3832025806589341735
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3832025806589341734}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 37.06671, y: 83.64209, z: 179.3493}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3832025806589341736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3832025806589341734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 310596e0874e11c4daf448160dd3c597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 3961258369910024740, guid: 15e15f355bffdd1479ac2327d87dd748, type: 3}
+  vectores:
+  - {x: -580, y: 140, z: -536}
+  - {x: -540, y: 140, z: -536}
+  - {x: -540, y: 140, z: -421}
+  - {x: -540, y: 158.6, z: -421}
+  - {x: -540, y: 158.6, z: -411.7}
+  vectores2:
+  - {x: -645.2, y: 140, z: -239.58}
+  - {x: -645.2, y: 140, z: -203.9}
+  - {x: -604.56, y: 140, z: -203.9}
+  - {x: -604.56, y: 156.98, z: -203.9}
+  - {x: -594.31, y: 156.98, z: -203.9}
