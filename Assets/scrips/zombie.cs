@@ -10,6 +10,7 @@ public class zombie : MonoBehaviour
     [SerializeField] GameObject jugador;
     [SerializeField] Rigidbody MyRigidbody;
     [SerializeField] BoxCollider colider;
+    GameObject rondas;
     bool estaSiguiendolo=false;
     Vector3 seguimiento;
     bool estaMuerto = false;
@@ -41,6 +42,11 @@ public class zombie : MonoBehaviour
         get { return jugador; }
         set { jugador = value; }
     }
+    public GameObject Rondas
+    {
+        get { return rondas; }
+        set { rondas = value; }
+    }
 
 
     // Start is called before the first frame update
@@ -70,6 +76,11 @@ public class zombie : MonoBehaviour
         estaSiguiendolo = false;
         colider.enabled = false;
         MyRigidbody.velocity = Vector3.zero;
+        rondas.GetComponent<controladorRondas>().CantidadZombies -= 1;
+        if(rondas.GetComponent<controladorRondas>().CantidadZombies==0 && rondas.GetComponent<controladorRondas>().CantidadZombiesMax == 0)
+        {
+            rondas.GetComponent<controladorRondas>().terminoRonda();
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

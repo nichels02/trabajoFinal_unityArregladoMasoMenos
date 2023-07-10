@@ -16,6 +16,7 @@ public class generacionZombie : MonoBehaviour
     [SerializeField] GameObject jugador;
     [SerializeField] GameObject rotacion;
     [SerializeField] GameObject dañador;
+    [SerializeField] GameObject rondas;
     bool eleccion;
 
 
@@ -40,6 +41,7 @@ public class generacionZombie : MonoBehaviour
             enemigo.GetComponent<recorridoDeZombie>().Jugador = jugador;
             enemigo.GetComponent<rotacionDelEnemigo>().Jugador = jugador;
             enemigo.GetComponent<zombie>().Jugador = jugador;
+            enemigo.GetComponent<zombie>().Rondas = rondas;
             enemigo.GetComponent<zombie>().Vida = vida * controladorDeRondas.GetComponent<controladorRondas>().Rondas;
             enemigo.GetComponent<zombie>().Daño = daño;
             enemigo.GetComponent<zombie>().Velocidad = velocidad;
@@ -53,6 +55,7 @@ public class generacionZombie : MonoBehaviour
             enemigo.GetComponent<recorridoDeZombie>().Jugador = jugador;
             enemigo.GetComponent<rotacionDelEnemigo>().Jugador = jugador;
             enemigo.GetComponent<zombie>().Jugador = jugador;
+            enemigo.GetComponent<zombie>().Rondas = rondas;
             enemigo.GetComponent<zombie>().Vida = vida * controladorDeRondas.GetComponent<controladorRondas>().Rondas;
             enemigo.GetComponent<zombie>().Daño = daño;
             enemigo.GetComponent<zombie>().Velocidad = velocidad;

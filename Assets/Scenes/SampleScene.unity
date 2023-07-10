@@ -6415,6 +6415,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tiempoGeneracion: 10
   restaDelTiempo: 1
+  textoDeRondas: {fileID: 1262192024}
   generarZombie:
     m_PersistentCalls:
       m_Calls:
@@ -8308,6 +8309,7 @@ MonoBehaviour:
   jugador: {fileID: 1504925194}
   rotacion: {fileID: 1198606903}
   "da\xF1ador": {fileID: 0}
+  rondas: {fileID: 1681318138573470015}
 --- !u!23 &5711088027439580256
 MeshRenderer:
   m_ObjectHideFlags: 0

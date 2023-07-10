@@ -29,6 +29,7 @@ public class movimiento : rotacion
     [Header("vida")]
     [SerializeField] Image[] corazones = new Image[10];
     int vida = 100;
+    bool EstaSiendoatacado=true;
 
     public int Vida
     {
@@ -248,7 +249,15 @@ public class movimiento : rotacion
     {
         vida -= restarVida;
         int x = (int)Mathf.Ceil(vida / 10);
-        Destroy(corazones[x].gameObject);
+        if (EstaSiendoatacado == true)
+        {
+            Destroy(corazones[x].gameObject);
+            EstaSiendoatacado = false;
+        }
+        else
+        {
+            EstaSiendoatacado = true;
+        }
         Debug.Log(vida);
     }
 

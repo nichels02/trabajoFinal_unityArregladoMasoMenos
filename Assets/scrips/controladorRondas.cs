@@ -2,18 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using TMPro;
 
 public class controladorRondas : MonoBehaviour
 {
     int rondas=1;
     [SerializeField] float tiempoGeneracion=10;
     [SerializeField] float restaDelTiempo=1;
+    [SerializeField] TMP_Text textoDeRondas;
     float tiempo=0;
     int cantidadZombies=0;
     int cantidadzombiesMax=20;
     int cantidadzombiesMaxDato=20;
     [SerializeField]UnityEvent generarZombie;
 
+    public int CantidadZombiesMax
+    {
+        get { return cantidadzombiesMax; }
+        set { cantidadzombiesMax = value; }
+    }
+    public int CantidadZombies 
+    { 
+        get { return cantidadZombies; } 
+        set { cantidadZombies = value; } 
+    }
     public int Rondas
     {
         get { return rondas; }
@@ -43,7 +55,9 @@ public class controladorRondas : MonoBehaviour
     }
     public void terminoRonda()
     {
+        rondas += 1;
         cantidadzombiesMax = cantidadzombiesMaxDato * rondas;
         tiempoGeneracion = tiempoGeneracion - restaDelTiempo;
+        textoDeRondas.text = "Ronda "+rondas;
     }
 }

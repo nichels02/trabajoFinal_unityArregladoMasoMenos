@@ -6,7 +6,7 @@ public class dañoZombie : MonoBehaviour
 {
     bool estaAtacando = false;
     float tiempo=0;
-    int yaAtaca=1;
+    float yaAtaca=0.5f;
     [SerializeField]GameObject jugador;
 
     public GameObject Jugador
@@ -49,7 +49,7 @@ public class dañoZombie : MonoBehaviour
                 estaAtacando = false;
                 if (jugador.GetComponent<movimiento>().Vida > 0)
                 {
-                    jugador.GetComponent<movimiento>().cambiarVida(10);
+                    jugador.GetComponent<movimiento>().cambiarVida(5);
                 }
             }
         }
