@@ -44,7 +44,7 @@ public class movimiento : rotacion
     // Start is called before the first frame update
     void Start()
     {
-        listaDeArmas.Add("pistolaPrincipal",10,10,1,1);
+        listaDeArmas.Add("pistolaPrincipal",10,10,1,2);
     }
 
     // Update is called once per frame
@@ -112,7 +112,7 @@ public class movimiento : rotacion
                 {
                     if(listaDeArmas.Head.CantidadDeBalas > 0)
                     {
-                        GameObject bala1 = Instantiate(Bala, generadorDeBala.transform.position, generadorDeBala.transform.rotation);
+                        GameObject bala1 = Instantiate(Bala, transform.position, generadorDeBala.transform.rotation);
                         bala1.GetComponent<bala>().Daño = listaDeArmas.Head.Daño;
                         listaDeArmas.Head.CantidadDeBalas -= 1;
                         tiempo = 0;
@@ -140,7 +140,7 @@ public class movimiento : rotacion
                 {
                     if(listaDeArmas.Head.CantidadDeBalas > 0)
                     {
-                        GameObject bala1 = Instantiate(Bala, generadorDeBala.transform.position, generadorDeBala.transform.rotation);
+                        GameObject bala1 = Instantiate(Bala, transform.position, generadorDeBala.transform.rotation);
                         bala1.GetComponent<bala>().Daño = listaDeArmas.Head.Daño;
                         listaDeArmas.Head.CantidadDeBalas -= 1;
                         tiempo = 0;
@@ -178,9 +178,9 @@ public class movimiento : rotacion
                 {
                     if(listaDeArmas.Head.CantidadDeBalas > 0)
                     {
-                        GameObject bala1 = Instantiate(Bala, generadorDeBalaEscoprta1.transform.position, generadorDeBalaEscoprta1.transform.rotation);
+                        GameObject bala1 = Instantiate(Bala, transform.position, generadorDeBalaEscoprta1.transform.rotation);
                         bala1.GetComponent<bala>().Daño = listaDeArmas.Head.Daño;
-                        GameObject bala2 = Instantiate(Bala, generadorDeBalaEscoprta2.transform.position, generadorDeBalaEscoprta2.transform.rotation);
+                        GameObject bala2 = Instantiate(Bala, transform.position, generadorDeBalaEscoprta2.transform.rotation);
                         bala2.GetComponent<bala>().Daño = listaDeArmas.Head.Daño;
                         listaDeArmas.Head.CantidadDeBalas -= 2;
                         tiempo = 0;

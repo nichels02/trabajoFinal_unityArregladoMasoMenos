@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 2730819872481546544}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 5.53}
-  m_LocalScale: {x: 8.964, y: 8.964, z: 4.4619203}
+  m_LocalScale: {x: 8.964, y: 17.83836, z: 4.4619203}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1954725380591355671}
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 4768660142568212949}
   m_Layer: 6
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: disparador
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

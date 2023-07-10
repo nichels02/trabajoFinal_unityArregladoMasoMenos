@@ -93,7 +93,7 @@ public class recorridoDeZombie : MonoBehaviour
     }
     public void colisionRecorido()
     {
-        Debug.Log("5");
+        
         if (Grafo.Tmp.Lista.Head != null)
         {
             Grafo.asignarEspecialConexion();
@@ -101,6 +101,7 @@ public class recorridoDeZombie : MonoBehaviour
         }
         else
         {
+            Zombie.Velocidad = 15;
             MyRigidbody.useGravity = true;
             colider.isTrigger = false;
             Zombie.enabled = true;

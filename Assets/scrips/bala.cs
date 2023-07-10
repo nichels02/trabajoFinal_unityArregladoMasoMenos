@@ -41,7 +41,7 @@ public class bala : MonoBehaviour
             }
 
         }
-        if(other.tag != "disparador")
+        if(other.tag != "disparador" && other.tag != "jugador")
         {
             Destroy(gameObject);
         }
