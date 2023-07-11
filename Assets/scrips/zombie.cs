@@ -76,11 +76,14 @@ public class zombie : MonoBehaviour
     {
         if(probabilidadDelArma == 3)
         {
-            Instantiate(escopeta, transform.position, transform.rotation);
+            GameObject arma = Instantiate(escopeta, transform.position, transform.rotation);
+            arma.GetComponent<rotacionDelEnemigo>().Jugador = jugador;
+
         }
         else if(probabilidadDelArma == 7)
         {
-            Instantiate(metralleta, transform.position, transform.rotation);
+            GameObject arma = Instantiate(metralleta, transform.position, transform.rotation);
+            arma.GetComponent<rotacionDelEnemigo>().Jugador = jugador;
         }
     }
 

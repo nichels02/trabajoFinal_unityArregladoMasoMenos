@@ -349,7 +349,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eab0db828c343794a8441a46c83c2dca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  vida: 0
   jugador: {fileID: 0}
+  escopeta: {fileID: 2596133759746604115, guid: 459c27bb320b31942b47fb0da8843ef8, type: 3}
+  metralleta: {fileID: 132504612831499429, guid: ddcd31eb84ba18e4a94aa8343597adbc, type: 3}
   MyRigidbody: {fileID: 1763398749371855434}
   colider: {fileID: 2768247337983212644}
 --- !u!114 &4469592697171781640

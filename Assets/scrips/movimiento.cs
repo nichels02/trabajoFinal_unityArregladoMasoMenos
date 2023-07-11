@@ -52,6 +52,7 @@ public class movimiento : rotacion
     void Start()
     {
         listaDeArmas.Add("pistolaPrincipal",10,10,1,2);
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -107,7 +108,24 @@ public class movimiento : rotacion
     }
     public void Mouse(InputAction.CallbackContext value)
     {
-        if(Cursor.lockState == CursorLockMode.None)
+        pausa();
+        mouseEstatico();
+    }
+
+    public void pausa()
+    {
+        if (Time.timeScale == 1f)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1f;
+        }
+    }
+    public void mouseEstatico()
+    {
+        if (Cursor.lockState == CursorLockMode.None)
         {
 
             Cursor.lockState = CursorLockMode.Locked;
@@ -151,130 +169,134 @@ public class movimiento : rotacion
 
     public void Disparar(InputAction.CallbackContext value)
     {
-        float valor = value.ReadValue<float>();
-        if (listaDeArmas.Head.Valor == "pistolaPrincipal")
+        if(Time.timeScale == 1f)
         {
-            if (tiempo > 1)
+            float valor = value.ReadValue<float>();
+            if (listaDeArmas.Head.Valor == "pistolaPrincipal")
             {
-                if (valor == 1)
+                if (tiempo > 1)
                 {
-                    if(listaDeArmas.Head.CantidadDeBalas > 0)
+                    if (valor == 1)
                     {
-                        GameObject bala1 = Instantiate(Bala, transform.position, generadorDeBala.transform.rotation);
-                        bala1.GetComponent<bala>().Jugador = jugador;
-                        bala1.GetComponent<bala>().Daño = listaDeArmas.Head.Daño;
-                        listaDeArmas.Head.CantidadDeBalas -= 1;
-                        tiempo = 0;
-                        if (listaDeArmas.Head.CantidadDeBalas <= 0)
+                        if (listaDeArmas.Head.CantidadDeBalas > 0)
                         {
-                            if (estaEnRecarga == false)
+                            GameObject bala1 = Instantiate(Bala, transform.position, generadorDeBala.transform.rotation);
+                            bala1.GetComponent<bala>().Jugador = jugador;
+                            bala1.GetComponent<bala>().Daño = listaDeArmas.Head.Daño;
+                            listaDeArmas.Head.CantidadDeBalas -= 1;
+                            tiempo = 0;
+                            if (listaDeArmas.Head.CantidadDeBalas <= 0)
                             {
-                                tiempoDeRecargas = 0;
-                                estaEnRecarga = true;
+                                if (estaEnRecarga == false)
+                                {
+                                    tiempoDeRecargas = 0;
+                                    estaEnRecarga = true;
+                                }
                             }
                         }
-                    }
 
 
-                    textoBalas.text = listaDeArmas.Head.CantidadDeBalas + "/ ?";
-
-                }
-            }
-        }
-        else if (listaDeArmas.Head.Valor == "metralleta")
-        {
-            if (tiempo > listaDeArmas.Head.TiempoMax)
-            {
-                if (valor == 1)
-                {
-                    if(listaDeArmas.Head.CantidadDeBalas > 0)
-                    {
-                        GameObject bala1 = Instantiate(Bala, transform.position, generadorDeBala.transform.rotation);
-                        bala1.GetComponent<bala>().Daño = listaDeArmas.Head.Daño;
-                        bala1.GetComponent<bala>().Jugador = jugador;
-                        listaDeArmas.Head.CantidadDeBalas -= 1;
-                        tiempo = 0;
-                        textoBalas.text = listaDeArmas.Head.CantidadDeBalas + "/ " + listaDeArmas.Head.CantidadDeBalasTotales;
-                        if (listaDeArmas.Head.CantidadDeBalas <= 0 && listaDeArmas.Head.CantidadDeBalasTotales <= 0)
-                        {
-                            listaDeArmas.remove();
-                            if (listaDeArmas.Head.Valor == "pistolaPrincipal")
-                            {
-                                textoBalas.text = listaDeArmas.Head.CantidadDeBalas + "/ ?";
-                            }
-                            else
-                            {
-                                textoBalas.text = listaDeArmas.Head.CantidadDeBalas + "/ " + listaDeArmas.Head.CantidadDeBalasTotales;
-                            }
-                        }
-                        else if (listaDeArmas.Head.CantidadDeBalas <= 0)
-                        {
-                            if (estaEnRecarga == false)
-                            {
-                                tiempoDeRecargas = 0;
-                                estaEnRecarga = true;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        else if (listaDeArmas.Head.Valor == "escopeta")
-        {
-            if (tiempo > listaDeArmas.Head.TiempoMax)
-            {
-                if (valor == 1)
-                {
-                    if(listaDeArmas.Head.CantidadDeBalas > 0)
-                    {
-                        GameObject bala1 = Instantiate(Bala, transform.position, generadorDeBalaEscoprta1.transform.rotation);
-                        bala1.GetComponent<bala>().Daño = listaDeArmas.Head.Daño;
-                        bala1.GetComponent<bala>().Jugador = jugador;
-                        GameObject bala2 = Instantiate(Bala, transform.position, generadorDeBalaEscoprta2.transform.rotation);
-                        bala2.GetComponent<bala>().Daño = listaDeArmas.Head.Daño;
-                        bala2.GetComponent<bala>().Jugador = jugador;
-                        listaDeArmas.Head.CantidadDeBalas -= 2;
-                        tiempo = 0;
-                        textoBalas.text = listaDeArmas.Head.CantidadDeBalas + "/ " + listaDeArmas.Head.CantidadDeBalasTotales;
-                        if (listaDeArmas.Head.CantidadDeBalas <= 0 && listaDeArmas.Head.CantidadDeBalasTotales <= 0)
-                        {
-                            listaDeArmas.remove();
-                            if (listaDeArmas.Head.Valor == "pistolaPrincipal")
-                            {
-                                textoBalas.text = listaDeArmas.Head.CantidadDeBalas + "/ ?";
-                            }
-                            else
-                            {
-                                textoBalas.text = listaDeArmas.Head.CantidadDeBalas + "/ " + listaDeArmas.Head.CantidadDeBalasTotales;
-                            }
-                        }
-                        else if (listaDeArmas.Head.CantidadDeBalas <= 0)
-                        {
-                            if (estaEnRecarga == false)
-                            {
-                                tiempoDeRecargas = 0;
-                                estaEnRecarga = true;
-                            }
-                        }
+                        textoBalas.text = listaDeArmas.Head.CantidadDeBalas + "/ ?";
 
                     }
                 }
             }
+            else if (listaDeArmas.Head.Valor == "metralleta")
+            {
+                if (tiempo > listaDeArmas.Head.TiempoMax)
+                {
+                    if (valor == 1)
+                    {
+                        if (listaDeArmas.Head.CantidadDeBalas > 0)
+                        {
+                            GameObject bala1 = Instantiate(Bala, transform.position, generadorDeBala.transform.rotation);
+                            bala1.GetComponent<bala>().Daño = listaDeArmas.Head.Daño;
+                            bala1.GetComponent<bala>().Jugador = jugador;
+                            listaDeArmas.Head.CantidadDeBalas -= 1;
+                            tiempo = 0;
+                            textoBalas.text = listaDeArmas.Head.CantidadDeBalas + "/ " + listaDeArmas.Head.CantidadDeBalasTotales;
+                            if (listaDeArmas.Head.CantidadDeBalas <= 0 && listaDeArmas.Head.CantidadDeBalasTotales <= 0)
+                            {
+                                listaDeArmas.remove();
+                                if (listaDeArmas.Head.Valor == "pistolaPrincipal")
+                                {
+                                    textoBalas.text = listaDeArmas.Head.CantidadDeBalas + "/ ?";
+                                }
+                                else
+                                {
+                                    textoBalas.text = listaDeArmas.Head.CantidadDeBalas + "/ " + listaDeArmas.Head.CantidadDeBalasTotales;
+                                }
+                            }
+                            else if (listaDeArmas.Head.CantidadDeBalas <= 0)
+                            {
+                                if (estaEnRecarga == false)
+                                {
+                                    tiempoDeRecargas = 0;
+                                    estaEnRecarga = true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else if (listaDeArmas.Head.Valor == "escopeta")
+            {
+                if (tiempo > listaDeArmas.Head.TiempoMax)
+                {
+                    if (valor == 1)
+                    {
+                        if (listaDeArmas.Head.CantidadDeBalas > 0)
+                        {
+                            GameObject bala1 = Instantiate(Bala, transform.position, generadorDeBalaEscoprta1.transform.rotation);
+                            bala1.GetComponent<bala>().Daño = listaDeArmas.Head.Daño;
+                            bala1.GetComponent<bala>().Jugador = jugador;
+                            GameObject bala2 = Instantiate(Bala, transform.position, generadorDeBalaEscoprta2.transform.rotation);
+                            bala2.GetComponent<bala>().Daño = listaDeArmas.Head.Daño;
+                            bala2.GetComponent<bala>().Jugador = jugador;
+                            listaDeArmas.Head.CantidadDeBalas -= 2;
+                            tiempo = 0;
+                            textoBalas.text = listaDeArmas.Head.CantidadDeBalas + "/ " + listaDeArmas.Head.CantidadDeBalasTotales;
+                            if (listaDeArmas.Head.CantidadDeBalas <= 0 && listaDeArmas.Head.CantidadDeBalasTotales <= 0)
+                            {
+                                listaDeArmas.remove();
+                                if (listaDeArmas.Head.Valor == "pistolaPrincipal")
+                                {
+                                    textoBalas.text = listaDeArmas.Head.CantidadDeBalas + "/ ?";
+                                }
+                                else
+                                {
+                                    textoBalas.text = listaDeArmas.Head.CantidadDeBalas + "/ " + listaDeArmas.Head.CantidadDeBalasTotales;
+                                }
+                            }
+                            else if (listaDeArmas.Head.CantidadDeBalas <= 0)
+                            {
+                                if (estaEnRecarga == false)
+                                {
+                                    tiempoDeRecargas = 0;
+                                    estaEnRecarga = true;
+                                }
+                            }
+
+                        }
+                    }
+                }
+            }
+
+
+            /*
+            if (CantidadBala > 0 & tiempo>1)
+            {
+                if (valor == 1)
+                {
+
+                    Instantiate(Bala, generadorDeBala.transform.position, generadorDeBala.transform.rotation);
+                    CantidadBala -= 1;
+                    tiempo = 0;
+                }
+            }
+            */
         }
 
-        
-        /*
-        if (CantidadBala > 0 & tiempo>1)
-        {
-            if (valor == 1)
-            {
-                
-                Instantiate(Bala, generadorDeBala.transform.position, generadorDeBala.transform.rotation);
-                CantidadBala -= 1;
-                tiempo = 0;
-            }
-        }
-        */
     }
 
     public void Recargar()
