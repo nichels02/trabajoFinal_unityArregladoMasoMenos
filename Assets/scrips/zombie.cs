@@ -51,7 +51,16 @@ public class zombie : MonoBehaviour
         set { rondas = value; }
     }
 
-
+    public GameObject Metralleta
+    {
+        get { return metralleta; }
+        set { metralleta = value; }
+    }
+    public GameObject Escopeta
+    {
+        get { return escopeta; }
+        set { escopeta = value; }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -61,14 +70,14 @@ public class zombie : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (estaSiguiendolo == true)
+        if (estaMuerto == true)
+        {
+
+        }
+        else if (estaSiguiendolo == true)
         {
             seguimiento = new Vector3(jugador.transform.position.x, 138, jugador.transform.position.z);
             MyRigidbody.velocity = (seguimiento - transform.position).normalized * velocidad;
-        }
-        if (estaMuerto == true)
-        {
-            
         }
         
     }
@@ -89,6 +98,7 @@ public class zombie : MonoBehaviour
 
     public void morir()
     {
+        soltarArma();
         estaMuerto = true;
         estaSiguiendolo = false;
         colider.enabled = false;
@@ -116,6 +126,10 @@ public class zombie : MonoBehaviour
                 MyRigidbody.mass = 1;
                 inicio = true;
             }
+        }
+        if (other.tag == "destructor")
+        {
+            Destroy(gameObject);
         }
         /*
         if (other.tag == "bala")

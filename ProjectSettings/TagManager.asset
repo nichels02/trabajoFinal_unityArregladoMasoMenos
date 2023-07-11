@@ -12,6 +12,7 @@ TagManager:
   - Jugador
   - bala
   - colegio
+  - destructor
   layers:
   - Default
   - TransparentFX

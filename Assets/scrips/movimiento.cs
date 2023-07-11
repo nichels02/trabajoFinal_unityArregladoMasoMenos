@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class movimiento : rotacion
 {
@@ -33,6 +34,8 @@ public class movimiento : rotacion
     [SerializeField] Image[] corazones = new Image[10];
     int vida = 100;
     bool EstaSiendoatacado = true;
+    [SerializeField] SOPuntaje puntajesAddDate;
+    [SerializeField] controladorTiempo timeController;
 
     public int Vida
     {
@@ -331,6 +334,12 @@ public class movimiento : rotacion
             EstaSiendoatacado = true;
         }
         Debug.Log(vida);
+
+        if (vida <= 0)
+        {
+            puntajesAddDate.add(elpuntaje,timeController.SegundosTotales);
+            SceneManager.LoadScene("menu");
+        }
     }
 
     private void OnTriggerEnter(Collider other)

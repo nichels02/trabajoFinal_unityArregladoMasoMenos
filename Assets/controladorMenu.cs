@@ -2,13 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class controladorMenu : MonoBehaviour
 {
-    // Start is called before the first frame update
+    [SerializeField] SOPuntaje puntajeSO;
+    [SerializeField] TMP_Text[] text;
     void Start()
     {
-        
+        for (int i = 0; i < text.Length; i++)
+        {
+            text[i].text = "Score: " + puntajeSO.Returm()[i];
+        }
+        Cursor.lockState = CursorLockMode.None;
     }
 
     // Update is called once per frame

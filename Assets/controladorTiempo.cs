@@ -29,6 +29,7 @@ public class controladorTiempo : MonoBehaviour
         calculador += Time.deltaTime;
         if(calculador > 1)
         {
+            segundosTotales += 1;
             calculador = 0;
             segundos += 1;
             if (segundos < 10)
