@@ -10,6 +10,9 @@ public class movimiento : rotacion
     [Header("Datos de Movimiento y Rotacion")]
     [SerializeField] float velocidad;
     [SerializeField] Rigidbody myRigidbody;
+    [SerializeField] GameObject jugador;
+    [SerializeField] TMP_Text puntaje;
+    [SerializeField] int elpuntaje;
     Vector2 inputMovement;
     Vector2 Vector;
 
@@ -29,14 +32,18 @@ public class movimiento : rotacion
     [Header("vida")]
     [SerializeField] Image[] corazones = new Image[10];
     int vida = 100;
-    bool EstaSiendoatacado=true;
+    bool EstaSiendoatacado = true;
 
     public int Vida
     {
         get { return vida; }
         set { vida = value; }
     }
-
+    public int ELPuntaje
+    {
+        get { return elpuntaje; }
+        set { elpuntaje = value; }
+    }
 
 
 
@@ -66,8 +73,49 @@ public class movimiento : rotacion
             }
         }
 
-        
-        
+
+
+
+    }
+
+    public void actualizarPuntaje()
+    {
+        if (elpuntaje < 10)
+        {
+            puntaje.text = "00000" + elpuntaje;
+        }
+        else if (elpuntaje < 100)
+        {
+            puntaje.text = "0000" + elpuntaje;
+        }
+        else if (elpuntaje < 1000)
+        {
+            puntaje.text = "000" + elpuntaje;
+        }
+        else if (elpuntaje < 10000)
+        {
+            puntaje.text = "00" + elpuntaje;
+        }
+        else if (elpuntaje < 100000)
+        {
+            puntaje.text = "0" + elpuntaje;
+        }
+        else
+        {
+            puntaje.text = "" + elpuntaje;
+        }
+    }
+    public void Mouse(InputAction.CallbackContext value)
+    {
+        if(Cursor.lockState == CursorLockMode.None)
+        {
+
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
 
     public void Movement()
@@ -113,6 +161,7 @@ public class movimiento : rotacion
                     if(listaDeArmas.Head.CantidadDeBalas > 0)
                     {
                         GameObject bala1 = Instantiate(Bala, transform.position, generadorDeBala.transform.rotation);
+                        bala1.GetComponent<bala>().Jugador = jugador;
                         bala1.GetComponent<bala>().Daño = listaDeArmas.Head.Daño;
                         listaDeArmas.Head.CantidadDeBalas -= 1;
                         tiempo = 0;
@@ -142,12 +191,12 @@ public class movimiento : rotacion
                     {
                         GameObject bala1 = Instantiate(Bala, transform.position, generadorDeBala.transform.rotation);
                         bala1.GetComponent<bala>().Daño = listaDeArmas.Head.Daño;
+                        bala1.GetComponent<bala>().Jugador = jugador;
                         listaDeArmas.Head.CantidadDeBalas -= 1;
                         tiempo = 0;
                         textoBalas.text = listaDeArmas.Head.CantidadDeBalas + "/ " + listaDeArmas.Head.CantidadDeBalasTotales;
                         if (listaDeArmas.Head.CantidadDeBalas <= 0 && listaDeArmas.Head.CantidadDeBalasTotales <= 0)
                         {
-                            Debug.Log("- metralleta");
                             listaDeArmas.remove();
                             if (listaDeArmas.Head.Valor == "pistolaPrincipal")
                             {
@@ -180,14 +229,15 @@ public class movimiento : rotacion
                     {
                         GameObject bala1 = Instantiate(Bala, transform.position, generadorDeBalaEscoprta1.transform.rotation);
                         bala1.GetComponent<bala>().Daño = listaDeArmas.Head.Daño;
+                        bala1.GetComponent<bala>().Jugador = jugador;
                         GameObject bala2 = Instantiate(Bala, transform.position, generadorDeBalaEscoprta2.transform.rotation);
                         bala2.GetComponent<bala>().Daño = listaDeArmas.Head.Daño;
+                        bala2.GetComponent<bala>().Jugador = jugador;
                         listaDeArmas.Head.CantidadDeBalas -= 2;
                         tiempo = 0;
                         textoBalas.text = listaDeArmas.Head.CantidadDeBalas + "/ " + listaDeArmas.Head.CantidadDeBalasTotales;
                         if (listaDeArmas.Head.CantidadDeBalas <= 0 && listaDeArmas.Head.CantidadDeBalasTotales <= 0)
                         {
-                            Debug.Log("- escopeta");
                             listaDeArmas.remove();
                             if (listaDeArmas.Head.Valor == "pistolaPrincipal")
                             {
@@ -269,13 +319,11 @@ public class movimiento : rotacion
             Destroy(other.gameObject);
             if(arma == "metralleta" && other.GetComponent<arma>().CanDetect == true)
             {
-                Debug.Log("metralleta");
                 listaDeArmas.Add2(arma,30,30,300, 0.2f,5);
                 textoBalas.text = listaDeArmas.Head.CantidadDeBalas + "/ " + listaDeArmas.Head.CantidadDeBalasTotales;
             }
             else if(arma == "escopeta" && other.GetComponent<arma>().CanDetect == true)
             {
-                Debug.Log("escopeta");
                 listaDeArmas.Add2(arma, 8, 8, 64, 2,20);
                 textoBalas.text = listaDeArmas.Head.CantidadDeBalas + "/ " + listaDeArmas.Head.CantidadDeBalasTotales;
             }

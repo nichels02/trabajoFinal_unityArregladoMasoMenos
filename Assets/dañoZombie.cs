@@ -27,14 +27,12 @@ public class dañoZombie : MonoBehaviour
         if (estaAtacando == true)
         {
             tiempo += Time.deltaTime;
-            Debug.Log("preparando ataco +"+tiempo);
         }
     }
     private void OnTriggerEnter(Collider other)
     {
         if(other.tag == "jugador")
         {
-            Debug.Log("preparando ataco");
             estaAtacando = true;
         }
     }
@@ -44,7 +42,6 @@ public class dañoZombie : MonoBehaviour
         {
             if (tiempo >= yaAtaca)
             {
-                Debug.Log("ya ataco");
                 tiempo = 0;
                 estaAtacando = false;
                 if (jugador.GetComponent<movimiento>().Vida > 0)

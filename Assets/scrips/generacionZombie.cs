@@ -47,7 +47,6 @@ public class generacionZombie : MonoBehaviour
             enemigo.GetComponent<zombie>().Velocidad = velocidad;
             enemigo.GetComponent<recorridoDeZombie>().Posicion = 1;
             enemigo.GetComponent<zombie>().enabled = false;
-            Debug.Log("1");
         }
         else
         {
@@ -61,7 +60,6 @@ public class generacionZombie : MonoBehaviour
             enemigo.GetComponent<zombie>().Velocidad = velocidad;
             enemigo.GetComponent<recorridoDeZombie>().Posicion = 2;
             enemigo.GetComponent<zombie>().enabled = false;
-            Debug.Log("2");
         }
     }
 }

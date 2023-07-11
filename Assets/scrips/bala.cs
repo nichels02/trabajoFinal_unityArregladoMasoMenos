@@ -7,7 +7,14 @@ public class bala : MonoBehaviour
     [SerializeField] Rigidbody myRigidbody;
     [SerializeField] float velocidad;
     [SerializeField]int daño;
+    bool yaColiciono = false;
+    GameObject jugador;
 
+    public GameObject Jugador
+    {
+        get { return jugador; }
+        set { jugador = value; }
+    }
     public int Daño
     {
         get { return daño; }
@@ -28,21 +35,42 @@ public class bala : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "enemigo")
+        Debug.Log("colicion 1");
+        if (yaColiciono == false)
         {
-            if (other.GetComponent<zombie>().EstaSiguiendolo==true)
+            Debug.Log("colicion 2");
+            if (other.tag == "enemigo")
             {
-                other.GetComponent<zombie>().Vida -= daño;
-                Debug.Log(other.GetComponent<zombie>().Vida);
-                if (other.GetComponent<zombie>().Vida <= 0)
+                Debug.Log("colicion 3");
+                if (other.GetComponent<zombie>().EstaSiguiendolo == true)
                 {
-                    other.GetComponent<zombie>().morir();
-                }
-            }
+                    yaColiciono = true;
+                    Debug.Log("colicion 4");
+                    other.GetComponent<zombie>().Vida -= daño;
+                    Debug.Log(other.GetComponent<zombie>().Vida);
+                    jugador.GetComponent<movimiento>().ELPuntaje += 10;
+                    if (other.GetComponent<zombie>().Vida <= 0)
+                    {
+                        jugador.GetComponent<movimiento>().ELPuntaje += 100;
+                        other.GetComponent<zombie>().morir();
+                    }
 
+                    jugador.GetComponent<movimiento>().actualizarPuntaje();
+
+                }
+
+            }
         }
-        if(other.tag != "disparador" && other.tag != "jugador")
+        if(other.tag != "disparador" && other.tag != "jugador" && other.tag != "bala")
         {
+            if (other.tag == "enemigo")
+            {
+                Debug.Log("colicion destruccion");
+            }
+            else
+            {
+                Debug.Log(other.tag);
+            }
             Destroy(gameObject);
         }
     }

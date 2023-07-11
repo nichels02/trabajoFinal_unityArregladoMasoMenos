@@ -6,8 +6,10 @@ public class zombie : MonoBehaviour
 {
     float velocidad;
     int daño;
-    float vida;
+    [SerializeField] float vida;
     [SerializeField] GameObject jugador;
+    [SerializeField] GameObject escopeta;
+    [SerializeField] GameObject metralleta;
     [SerializeField] Rigidbody MyRigidbody;
     [SerializeField] BoxCollider colider;
     GameObject rondas;
@@ -15,6 +17,7 @@ public class zombie : MonoBehaviour
     Vector3 seguimiento;
     bool estaMuerto = false;
     bool inicio = false;
+    int probabilidadDelArma;
 
     public bool EstaSiguiendolo
     {
@@ -52,7 +55,7 @@ public class zombie : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        probabilidadDelArma = Random.Range(1, 11);
     }
 
     // Update is called once per frame
@@ -68,6 +71,17 @@ public class zombie : MonoBehaviour
             
         }
         
+    }
+    public void soltarArma()
+    {
+        if(probabilidadDelArma == 3)
+        {
+            Instantiate(escopeta, transform.position, transform.rotation);
+        }
+        else if(probabilidadDelArma == 7)
+        {
+            Instantiate(metralleta, transform.position, transform.rotation);
+        }
     }
 
     public void morir()
@@ -85,11 +99,39 @@ public class zombie : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (inicio == false)
+
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "colegio")
         {
-            estaSiguiendolo = true;
-            MyRigidbody.mass = 1;
-            inicio=true;
+            if (inicio == false)
+            {
+                colider.isTrigger = false;
+                estaSiguiendolo = true;
+                MyRigidbody.mass = 1;
+                inicio = true;
+            }
         }
+        /*
+        if (other.tag == "bala")
+        {
+            if (other.GetComponent<zombie>().EstaSiguiendolo == true)
+            {
+                other.GetComponent<zombie>().Vida -= daño;
+                Debug.Log(other.GetComponent<zombie>().Vida);
+                if (other.GetComponent<zombie>().Vida <= 0)
+                {
+                    other.GetComponent<zombie>().morir();
+                }
+            }
+
+        }
+        if (other.tag != "disparador" && other.tag != "jugador")
+        {
+            Destroy(gameObject);
+        }
+        */
     }
 }

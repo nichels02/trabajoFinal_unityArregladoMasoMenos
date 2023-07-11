@@ -7,13 +7,14 @@ using TMPro;
 public class controladorRondas : MonoBehaviour
 {
     int rondas=1;
-    [SerializeField] float tiempoGeneracion=10;
-    [SerializeField] float restaDelTiempo=1;
+    [SerializeField] float tiempoGeneracion=1;
+    [SerializeField] float restaDelTiempo=0.1f;
     [SerializeField] TMP_Text textoDeRondas;
+    [SerializeField] GameObject jugador;
     float tiempo=0;
     int cantidadZombies=0;
-    int cantidadzombiesMax=20;
-    int cantidadzombiesMaxDato=20;
+    int cantidadzombiesMax=10;
+    int cantidadzombiesMaxDato=10;
     [SerializeField]UnityEvent generarZombie;
 
     public int CantidadZombiesMax
@@ -55,9 +56,11 @@ public class controladorRondas : MonoBehaviour
     }
     public void terminoRonda()
     {
+        tiempoGeneracion = tiempoGeneracion - (restaDelTiempo / rondas);
         rondas += 1;
         cantidadzombiesMax = cantidadzombiesMaxDato * rondas;
-        tiempoGeneracion = tiempoGeneracion - restaDelTiempo;
         textoDeRondas.text = "Ronda "+rondas;
+        jugador.GetComponent<movimiento>().ELPuntaje += 10;
+        jugador.GetComponent<movimiento>().actualizarPuntaje();
     }
 }
