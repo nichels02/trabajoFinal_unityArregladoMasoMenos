@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.Events;
 
 public class movimiento : rotacion
 {
@@ -36,7 +37,9 @@ public class movimiento : rotacion
     bool EstaSiendoatacado = true;
     [SerializeField] SOPuntaje puntajesAddDate;
     [SerializeField] controladorTiempo timeController;
-
+    [Header("animaciones")]
+    [SerializeField] UnityEvent comenzarAnimacion;
+    [SerializeField] UnityEvent comenzarAnimacionEscopeta;
     public int Vida
     {
         get { return vida; }
@@ -183,6 +186,7 @@ public class movimiento : rotacion
                     {
                         if (listaDeArmas.Head.CantidadDeBalas > 0)
                         {
+                            comenzarAnimacion.Invoke();
                             GameObject bala1 = Instantiate(Bala, transform.position, generadorDeBala.transform.rotation);
                             bala1.GetComponent<bala>().Jugador = jugador;
                             bala1.GetComponent<bala>().Daño = listaDeArmas.Head.Daño;

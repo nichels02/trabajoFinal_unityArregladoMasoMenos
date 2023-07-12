@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 
 public class dañoZombie : MonoBehaviour
 {
     bool estaAtacando = false;
     float tiempo=0;
     float yaAtaca=0.5f;
+    [SerializeField] Animator animacion;
     [SerializeField]GameObject jugador;
 
     public GameObject Jugador
@@ -43,7 +45,7 @@ public class dañoZombie : MonoBehaviour
             if (tiempo >= yaAtaca)
             {
                 tiempo = 0;
-                estaAtacando = false;
+                estaAtacando = true;
                 if (jugador.GetComponent<movimiento>().Vida > 0)
                 {
                     jugador.GetComponent<movimiento>().cambiarVida(5);

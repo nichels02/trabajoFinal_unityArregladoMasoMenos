@@ -12,7 +12,7 @@ public class controladorMenu : MonoBehaviour
     {
         for (int i = 0; i < text.Length; i++)
         {
-            text[i].text = "Score: " + puntajeSO.Returm()[i];
+            text[i].text = "Score " + (10 - i) +" : " + puntajeSO.Returm()[i];
         }
         Cursor.lockState = CursorLockMode.None;
     }
