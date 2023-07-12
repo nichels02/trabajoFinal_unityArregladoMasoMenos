@@ -7,7 +7,7 @@ public class dañoZombie : MonoBehaviour
 {
     bool estaAtacando = false;
     float tiempo=0;
-    float yaAtaca=0.5f;
+    float yaAtaca=2f;
     [SerializeField] Animator animacion;
     [SerializeField]GameObject jugador;
 
@@ -36,6 +36,7 @@ public class dañoZombie : MonoBehaviour
         if(other.tag == "jugador")
         {
             estaAtacando = true;
+            animacion.SetInteger("CualAnimacion", 1);
         }
     }
     private void OnTriggerStay(Collider other)
@@ -60,6 +61,7 @@ public class dañoZombie : MonoBehaviour
         {
             estaAtacando = false;
             tiempo = 0;
+            animacion.SetInteger("CualAnimacion", 0);
         }
     }
 }

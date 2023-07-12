@@ -22,9 +22,9 @@ public class SOPuntaje : ScriptableObject
                 listaPuntajes[0] = calculatepuntaje;
             }
         }
-        Bubbl3eSort();
+        Burbuja();
     }
-    void Bubbl3eSort()
+    void Burbuja()
     {
         int tmp;
         for(int i =0; i< listaPuntajes.Length - 1; i++)
